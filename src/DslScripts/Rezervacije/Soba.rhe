@@ -12,12 +12,23 @@ Module Rezervacije
         Integer Price { MinValue 0; }
     }
 
-    Entity Gost
+    Entity TipGosta
+    {
+       ShortString Name;
+    }
+
+    Entity Osoba 
     {
         LongString FirstName { Required; }
         LongString LastName { Required; }
         ShortString Phone;
         ShortString Email { Unique; }
+    }
+
+    Entity Gost
+    {
+        Extends Rezervacije.Osoba;
+        Reference GuestType Rezervacije.TipGosta;      
     }
 
     Entity Rezervacija
