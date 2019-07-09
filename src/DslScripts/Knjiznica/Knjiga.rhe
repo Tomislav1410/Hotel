@@ -1,0 +1,53 @@
+Module Knjiznica 
+{
+    Entity Knjiga
+    {
+        ShortString Kod {Autocode;}
+        ShortString Naslov;
+        Integer BrojStranica;
+        Reference Autor Knjiznica.Osoba;
+//      Reference Osoba;
+
+        ItemFilter CommonMisspelling 'item => item.Naslov.Contains("curiousity")';
+        InvalidData CommonMisspelling 'It is not allowed to enter misspelled word "curiousity".';
+
+        Logging;
+    }
+
+    Entity Osoba
+    {
+        ShortString Ime;
+    }
+
+    Entity DjecjaKnjiga
+    {
+        Extends Knjiznica.Knjiga;
+
+        Integer AgeFrom;
+        Integer AgeTo;
+    }
+
+    Entity StranaKnjiga
+    {
+        Extends Knjiznica.Knjiga;
+
+        ShortString IzvorniJezik;
+        Reference Prevoditelj Knjiznica.Osoba;
+    }
+
+    Entity Tema
+    {
+        ShortString Name {Unique; Required;}
+
+    }
+
+    Entity KnjigaTema
+    {
+        Reference Knjiga {Detail;}  // kreira index, cascade delete, 
+        Reference Tema {Required;}
+
+        UniqueMultiple 'Knjiga Tema';
+    }
+
+
+}
