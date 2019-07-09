@@ -14,7 +14,7 @@ Module Rezervacije
 
     Entity TipGosta
     {
-       ShortString Name;
+       ShortString Name { Required; } 
     }
 
     Entity Osoba 
