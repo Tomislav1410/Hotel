@@ -1,0 +1,30 @@
+Module Rezervacije
+{
+    Entity Soba
+    {
+        ShortString Name { Required; }
+        Reference RoomTypeId Rezervacije.TipSobe;
+    }
+
+    Entity TipSobe
+    {
+        ShortString Name { Required; }
+        Integer Price { MinValue 0; }
+    }
+
+    Entity Gost
+    {
+        LongString FirstName { Required; }
+        LongString LastName { Required; }
+        ShortString Phone;
+        ShortString Email { Unique; }
+    }
+
+    Entity Rezervacija
+    {
+        DateTime CheckIn { Required; }
+        DateTime CheckOut { Required; }
+        Reference GuestId Rezervacije.Gost { Detail; }
+        Reference RoomId Rezervacije.Soba { Required; }   
+    }
+}
