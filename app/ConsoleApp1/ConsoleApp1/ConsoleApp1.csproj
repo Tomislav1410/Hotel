@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{25AB4C81-AF40-46DF-86EA-6A526BE059D1}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>ConsoleApp1</RootNamespace>
+    <AssemblyName>ConsoleApp1</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac">
+      <HintPath>..\..\..\dist\HotelRhetosServer\bin\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Configuration">
+      <HintPath>..\..\..\dist\HotelRhetosServer\bin\Autofac.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.Wcf">
+      <HintPath>..\..\..\dist\HotelRhetosServer\bin\Autofac.Integration.Wcf.dll</HintPath>
+    </Reference>
+    <Reference Include="ConsoleDump, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ConsoleDump.0.7.0\lib\net45\ConsoleDump.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\..\..\dist\HotelRhetosServer\bin\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\..\..\dist\HotelRhetosServer\bin\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Ionic.Zip">
+      <HintPath>..\..\..\dist\HotelRhetosServer\bin\Ionic.Zip.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\dist\HotelRhetosServer\bin\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog">
+      <HintPath>..\..\..\dist\HotelRhetosServer\bin\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="NuGet.Core">
+      <HintPath>..\..\..\dist\HotelRhetosServer\bin\NuGet.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess">
+      <HintPath>..\..\..\dist\HotelRhetosServer\bin\Oracle.ManagedDataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="RestService">
+      <HintPath>..\..\..\dist\HotelRhetosServer\bin\Generated\RestService.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhetos">
+      <HintPath>..\..\..\dist\HotelRhetosServer\bin\Rhetos.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhetos.Compiler">
+      <HintPath>..\..\..\dist\HotelRhetosServer\bin\Rhetos.Compiler.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhetos.Compiler.Interfaces">
+      <HintPath>..\..\..\dist\HotelRhetosServer\bin\Rhetos.Compiler.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhetos.Configuration.Autofac">
+      <HintPath>..\..\..\dist\HotelRhetosServer\bin\Rhetos.Configuration.Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhetos.DatabaseGenerator">
+      <HintPath>..\..\..\dist\HotelRhetosServer\bin\Rhetos.DatabaseGenerator.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhetos.DatabaseGenerator.DefaultConcepts">
+      <HintPath>..\..\..\dist\HotelRhetosServer\bin\Plugins\Rhetos.DatabaseGenerator.DefaultConcepts.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhetos.DatabaseGenerator.Interfaces">
+      <HintPath>..\..\..\dist\HotelRhetosServer\bin\Rhetos.DatabaseGenerator.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhetos.Deployment">
+      <HintPath>..\..\..\dist\HotelRhetosServer\bin\Rhetos.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhetos.Deployment.Interfaces">
+      <HintPath>..\..\..\dist\HotelRhetosServer\bin\Rhetos.Deployment.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhetos.Dom">
+      <HintPath>..\..\..\dist\HotelRhetosServer\bin\Rhetos.Dom.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhetos.Dom.DefaultConcepts">
+      <HintPath>..\..\..\dist\HotelRhetosServer\bin\Plugins\Rhetos.Dom.DefaultConcepts.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhetos.Dom.DefaultConcepts.Interfaces">
+      <HintPath>..\..\..\dist\HotelRhetosServer\bin\Plugins\Rhetos.Dom.DefaultConcepts.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhetos.Dom.Interfaces">
+      <HintPath>..\..\..\dist\HotelRhetosServer\bin\Rhetos.Dom.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhetos.Dsl">
+      <HintPath>..\..\..\dist\HotelRhetosServer\bin\Rhetos.Dsl.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhetos.Dsl.DefaultConcepts">
+      <HintPath>..\..\..\dist\HotelRhetosServer\bin\Plugins\Rhetos.Dsl.DefaultConcepts.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhetos.Dsl.Interfaces">
+      <HintPath>..\..\..\dist\HotelRhetosServer\bin\Rhetos.Dsl.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhetos.Extensibility">
+      <HintPath>..\..\..\dist\HotelRhetosServer\bin\Rhetos.Extensibility.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhetos.Extensibility.Interfaces">
+      <HintPath>..\..\..\dist\HotelRhetosServer\bin\Rhetos.Extensibility.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhetos.Interfaces">
+      <HintPath>..\..\..\dist\HotelRhetosServer\bin\Rhetos.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhetos.Logging">
+      <HintPath>..\..\..\dist\HotelRhetosServer\bin\Rhetos.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhetos.Logging.Interfaces">
+      <HintPath>..\..\..\dist\HotelRhetosServer\bin\Rhetos.Logging.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhetos.Persistence">
+      <HintPath>..\..\..\dist\HotelRhetosServer\bin\Rhetos.Persistence.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhetos.Persistence.Interfaces">
+      <HintPath>..\..\..\dist\HotelRhetosServer\bin\Rhetos.Persistence.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhetos.Processing">
+      <HintPath>..\..\..\dist\HotelRhetosServer\bin\Rhetos.Processing.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhetos.Processing.DefaultCommands">
+      <HintPath>..\..\..\dist\HotelRhetosServer\bin\Plugins\Rhetos.Processing.DefaultCommands.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhetos.Processing.DefaultCommands.Interfaces">
+      <HintPath>..\..\..\dist\HotelRhetosServer\bin\Plugins\Rhetos.Processing.DefaultCommands.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhetos.Processing.Interfaces">
+      <HintPath>..\..\..\dist\HotelRhetosServer\bin\Rhetos.Processing.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhetos.RestGenerator">
+      <HintPath>..\..\..\dist\HotelRhetosServer\bin\Plugins\Rhetos.RestGenerator.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhetos.Security">
+      <HintPath>..\..\..\dist\HotelRhetosServer\bin\Rhetos.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhetos.Security.Interfaces">
+      <HintPath>..\..\..\dist\HotelRhetosServer\bin\Rhetos.Security.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhetos.TestCommon">
+      <HintPath>..\..\..\dist\HotelRhetosServer\bin\Rhetos.TestCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhetos.Utilities">
+      <HintPath>..\..\..\dist\HotelRhetosServer\bin\Rhetos.Utilities.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhetos.Web">
+      <HintPath>..\..\..\dist\HotelRhetosServer\bin\Rhetos.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhetos.XmlSerialization">
+      <HintPath>..\..\..\dist\HotelRhetosServer\bin\Rhetos.XmlSerialization.dll</HintPath>
+    </Reference>
+    <Reference Include="ServerDom.Model">
+      <HintPath>..\..\..\dist\HotelRhetosServer\bin\Generated\ServerDom.Model.dll</HintPath>
+    </Reference>
+    <Reference Include="ServerDom.Orm">
+      <HintPath>..\..\..\dist\HotelRhetosServer\bin\Generated\ServerDom.Orm.dll</HintPath>
+    </Reference>
+    <Reference Include="ServerDom.Repositories">
+      <HintPath>..\..\..\dist\HotelRhetosServer\bin\Generated\ServerDom.Repositories.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

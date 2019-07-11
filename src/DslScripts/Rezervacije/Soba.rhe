@@ -1,24 +1,43 @@
-Module Rezervacije
+﻿Module Rezervacije
 {
+
+    Entity Hotel
+    {
+        ShortString Name;
+    }
+
     Entity Soba
     {
         ShortString Name { Required; }
-        Reference RoomTypeId Rezervacije.TipSobe;
+        ShortString BrojSobe {Autocode; DefaultValue 'item => "Soba+++"';}
+        Reference RoomType Rezervacije.TipSobe;
+        Reference Hotel Rezervacije.Hotel;
+
+
+
     }
 
     Entity TipSobe
     {
         ShortString Name { Required; }
         Integer Price { MinValue 0; }
+
+        Logging;
     }
 
     Entity TipGosta
     {
-       ShortString Name { Required; } 
+        ShortString Name { Required; DefaultValue 'item => "Masa"'; } 
+    
+        ItemFilter Anoniman 'item => item.Name.Contains("anoniman")';
+        //InvalidData  Anoniman 'Tip gosta ne smije sadržavati riječ anoniman.';
+        Lock  Anoniman 'Tip gosta ne smije sadržavati riječ anoniman.';
     }
 
     Entity Osoba 
     {
+
+        //DenyUserEdit; 
         LongString FirstName { Required; }
         LongString LastName { Required; }
         ShortString Phone;
@@ -33,9 +52,40 @@ Module Rezervacije
 
     Entity Rezervacija
     {
+        Deactivatable;
         DateTime CheckIn { Required; }
         DateTime CheckOut { Required; }
-        Reference GuestId Rezervacije.Gost { Detail; }
-        Reference RoomId Rezervacije.Soba { Required; }   
+        Reference Guest Rezervacije.Gost { Detail; }
+        Reference Room Rezervacije.Soba { Required; }   
+        DateTime DateCreated { CreationTime; }
+        DateTime DateModified { ModificationTimeOf Rezervacije.Rezervacija.CheckIn; ModificationTimeOf Rezervacije.Rezervacija.CheckOut; }
+    }
+
+   // The hotel application should compute the total number of reservations made for a certain room (write an SqlQueryable that Extends the room entity).
+  
+  SqlQueryable TotalNumberOfReservations
+    "
+    SELECT s.ID,s.Name, count(*) Broj_Rezervacija
+    FROM Rezervacije.Rezervacija r
+     join Rezervacije.Soba s
+    on r.RoomID = s.ID
+     join Rezervacije.Hotel h
+    on s.HotelID = h.id
+    group by s.ID,s.Name
+    "
+    {
+        Extends Rezervacije.Soba;
+        ShortString Name;
+        Integer Broj_Rezervacija;
+    }
+
+    //The hotel application should contain a grid that displays a list of rooms, with three columns: RoomNumber, HotelName and NumberOfReservations.
+    // Create a data source for the grid (write a single Browse that takes data from entities Room, Hotel and from the previously created SqlQueryable).
+
+    Browse BrowseRooms Rezervacije.Soba
+    {
+        Take BrojSobe;
+        Take 'Hotel.Name';
+       // Take 'Extension_TotalNumberOfReservations.Broj_Rezervacija'
     }
 }

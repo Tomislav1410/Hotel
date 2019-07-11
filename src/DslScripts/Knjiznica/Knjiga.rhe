@@ -1,36 +1,99 @@
-Module Knjiznica;
-Entity Knjiznica.Knjiga;
-ShortString Knjiznica.Knjiga.Kod;
-Autocode Knjiznica.Knjiga.Kod;
-ShortString Knjiznica.Knjiga.Naslov;
-Integer Knjiznica.Knjiga.BrojStranica;
-Reference Knjiznica.Knjiga.Autor Knjiznica.Osoba;
-ItemFilter Knjiznica.Knjiga.CommonMisspelling 'item => item.Naslov.Contains("curiousity")';
-InvalidData Knjiznica.Knjiga.CommonMisspelling 'It is not allowed to enter misspelled word "curiousity".';
-Logging Knjiznica.Knjiga;
+Module Knjiznica 
+{
 
-Entity Knjiznica.Osoba;
-ShortString Knjiznica.Osoba.Ime;
-    
-Entity Knjiznica.DjecjaKnjiga;
-Extends Knjiznica.DjecjaKnjiga Knjiznica.Knjiga;
-Integer Knjiznica.DjecjaKnjiga.AgeFrom;
-Integer Knjiznica.DjecjaKnjiga.AgeTo;
+    Entity Stvar
+    {
+        ShortString Vrsta;
+    }
 
-Entity Knjiznica.StranaKnjiga;
-Extends Knjiznica.StranaKnjiga Knjiznica.Knjiga;
-ShortString Knjiznica.StranaKnjiga.IzvorniJezik;
-Reference Knjiznica.StranaKnjiga.Prevoditelj Knjiznica.Osoba;
+    Entity Knjiga
+    {
+       // Extends Knjiznica.Stvar;
+        ShortString Kod {Autocode; }
+        ShortString Naslov;
+        Integer BrojStranica { MinValue 5;}
+        Reference Autor Knjiznica.Osoba;
+//      Reference Osoba;
+//moguće je u itemFilteru dohvatiti cijelu bazu probaj
+//kada se ovo validira?
+        ItemFilter StranaKnjigaAutorImePocinjesX 'item => item.Autor.Ime.StartsWith("X") &&  item.Extension_StranaKnjiga != null';
 
-Entity Knjiznica.Tema;
-ShortString Knjiznica.Tema.Name;
-Unique Knjiznica.Tema.Name;
-Required Knjiznica.Tema.Name;
+        ItemFilter CommonMisspelling 'item => item.Naslov.Contains("curiousity")';
+        InvalidData CommonMisspelling 'It is not allowed to enter misspelled word "curiousity".';
+//query je od trenutnog entiteta 
+    ComposableFilterBy Pretrazivanje '(query, repository, parameter)=>
+    {
+        //if (parameter.MinBrojStranica != null)
+        return query.Where( knjiga => knjiga.BrojStranica > parameter.MinBrojStranica);
 
-Entity Knjiznica.KnjigaTema;
-Reference Knjiznica.KnjigaTema.Knjiga Knjiznica.Knjiga;
-Detail   Knjiznica.KnjigaTema.Knjiga;
-Reference Knjiznica.KnjigaTema.Tema Knjiznica.Tema;
-Required Knjiznica.KnjigaTema.Tema;
-//TODO napisati UniqueMultiple u flat verziji
-//UniqueMultiple Knjiznica.KnjigaTema.Knjiga, Knjiznica.KnjigaTema.Tema;
+        //return query;
+    }';
+
+    FilterBy Pretrazivanje2 '(repository, parameter) =>
+    {
+        return repository.Knjiznica.Knjiga.Query().Where(k => k.Naslov.Contains("post")).ToSimple().ToArray();
+    }';
+
+        Logging;
+    }
+
+    Parameter Pretrazivanje
+    {
+        Integer MinBrojStranica;
+    }
+
+    Parameter Pretrazivanje2;
+
+    Entity Osoba
+    {
+        ShortString Ime;
+    }
+
+    Entity DjecjaKnjiga
+    {
+        Extends Knjiznica.Knjiga;
+
+        Integer AgeFrom;
+        Integer AgeTo;
+    }
+
+    Entity StranaKnjiga
+    {
+        Extends Knjiznica.Knjiga;
+
+        ShortString IzvorniJezik;
+        Reference Prevoditelj Knjiznica.Osoba;
+    }
+
+    Entity Tema
+    {
+        ShortString Name {Unique; Required;}
+
+    }
+
+    Entity KnjigaTema
+    {
+        Reference Knjiga {Detail;}  // kreira index, cascade delete, 
+        Reference Tema {Required;}
+
+       // UniqueMultiple 'Knjiga Tema';
+    }
+
+    Browse KnjigaGrid Knjiznica.Knjiga
+    {
+        Take Naslov;
+        Take Ime 'Autor.Ime';
+        Take 'Extension_DjecjaKnjiga.AgeFrom';
+      //  Take 'Base.Vrsta';
+    }
+
+    SqlQueryable TemeKnjige 
+    <SQL\KnjigeTeme.sql>
+    {
+        Extends Knjiznica.Knjiga;
+        ShortString Naslov;
+        Integer BrojTema;
+    }
+
+
+} 
